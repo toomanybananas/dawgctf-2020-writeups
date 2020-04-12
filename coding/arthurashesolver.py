@@ -2,6 +2,8 @@
 """
 Created on Mon Mar 16 14:46:02 2020
 
+"Success is a journey, not a destination. The doing is often more important than the outcome." - Arthur Ashe
+
 @author: pleoxconfusa
 """
 
