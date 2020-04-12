@@ -17,7 +17,7 @@ Solution: hijack a session by forging a JWT header.
 The JWT was formed using the deprecated "username" and "identity" fields with the usual iat, nbf, and exp tokens.
 The username could be found by getting the description of username from the html and the username "true.grit@umbccd.io."
 The secret could be found in the PCAP after a successful login (`dawgCTF?heckin#bamboozle`).
-The identity was leaked by the form after an attempted login and stored as "JWT 'identity'" in your cookies.
+The identity was leaked by the form after an attempted login and stored as "JWT 'identity'" in your cookies (`31337`).
 
 This could be used to generate a JWT like the following, with a non expired iat.
 
