@@ -6,7 +6,7 @@ LIBC = ctypes.cdll.LoadLibrary('/lib/x86_64-linux-gnu/libc.so.6')
 if "rem" in sys.argv:
         proc = remote("ctf.umbccd.io", 4200)
 else:
-        proc = process("./animal_crossing_remote")
+        proc = process("./cookie_monster")
 
 #srand on the current time to get same seed as server
 LIBC.srand(LIBC.time(0))
