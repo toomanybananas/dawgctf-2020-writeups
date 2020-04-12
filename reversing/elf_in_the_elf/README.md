@@ -1,4 +1,5 @@
 # Elf in the Elf - rev 350
+# Author: trashcanna @annatea16
 
 create.py - Generation Script, not distributed\
 elf_in_the_elf_solve - Solution Script\
