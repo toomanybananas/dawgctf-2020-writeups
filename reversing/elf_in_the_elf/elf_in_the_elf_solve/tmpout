@@ -1,0 +1,41 @@
+0000000000001155 <math>:
+    1155:	55                   	push   rbp
+    1156:	48 89 e5             	mov    rbp,rsp
+    1159:	48 83 ec 20          	sub    rsp,0x20
+    115d:	89 f8                	mov    eax,edi
+    115f:	88 45 ec             	mov    BYTE PTR [rbp-0x14],al
+    1162:	c6 45 ff 74          	mov    BYTE PTR [rbp-0x1],0x74
+    1166:	0f be 45 ff          	movsx  eax,BYTE PTR [rbp-0x1]
+    116a:	0f be 55 ec          	movsx  edx,BYTE PTR [rbp-0x14]
+    116e:	83 c2 74             	add    edx,0x74
+    1171:	39 d0                	cmp    eax,edx
+    1173:	75 0e                	jne    1183 <math+0x2e>
+    1175:	48 8d 3d 88 0e 00 00 	lea    rdi,[rip+0xe88]        # 2004 <_IO_stdin_used+0x4>
+    117c:	e8 af fe ff ff       	call   1030 <puts@plt>
+    1181:	eb 0c                	jmp    118f <math+0x3a>
+    1183:	48 8d 3d 82 0e 00 00 	lea    rdi,[rip+0xe82]        # 200c <_IO_stdin_used+0xc>
+    118a:	e8 a1 fe ff ff       	call   1030 <puts@plt>
+    118f:	90                   	nop
+    1190:	c9                   	leave  
+    1191:	c3                   	ret    
+
+0000000000001192 <main>:
+    1192:	55                   	push   rbp
+    1193:	48 89 e5             	mov    rbp,rsp
+    1196:	48 83 ec 10          	sub    rsp,0x10
+    119a:	48 8d 3d 75 0e 00 00 	lea    rdi,[rip+0xe75]        # 2016 <_IO_stdin_used+0x16>
+    11a1:	b8 00 00 00 00       	mov    eax,0x0
+    11a6:	e8 95 fe ff ff       	call   1040 <printf@plt>
+    11ab:	48 8b 05 5e 2e 00 00 	mov    rax,QWORD PTR [rip+0x2e5e]        # 4010 <stdin@@GLIBC_2.2.5>
+    11b2:	48 89 c7             	mov    rdi,rax
+    11b5:	e8 96 fe ff ff       	call   1050 <fgetc@plt>
+    11ba:	88 45 ff             	mov    BYTE PTR [rbp-0x1],al
+    11bd:	0f be 45 ff          	movsx  eax,BYTE PTR [rbp-0x1]
+    11c1:	89 c7                	mov    edi,eax
+    11c3:	e8 8d ff ff ff       	call   1155 <math>
+    11c8:	b8 00 00 00 00       	mov    eax,0x0
+    11cd:	c9                   	leave  
+    11ce:	c3                   	ret    
+    11cf:	90                   	nop
+
+00000000000011d0 <__libc_csu_init>:
