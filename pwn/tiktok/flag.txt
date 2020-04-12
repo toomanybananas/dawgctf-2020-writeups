@@ -1,0 +1,2 @@
+Here's the flag:
+DawgCTF{h0t_aNd_d@ng3r0us}
