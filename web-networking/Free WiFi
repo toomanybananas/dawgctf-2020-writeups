@@ -1,0 +1,45 @@
+I will include the original challenge titles alongside the ones we went with. 
+I think the original challenge titles might've made this easier.
+This challenge was based on ways one may have gotten free wifi at aiports.
+The website was designed to be "old."
+This means the website does a lot of things in the way things simply aren't done anymore.
+This might've been irritating.
+I apologize.
+I included the pcap to discourage people from brute forcing; additionally, it more closely resembles what you could gather if you were trying to get free wifi somewhere (wireshark in promiscuous mode for example).
+
+Part 1 - Free Wifi page
+-----------------------
+Solution: get access to the page by finding `/staff.html` in the pcap.
+
+Part 2 - Free Wifi session
+--------------------------
+Solution: hijack a session by forging a JWT header.
+The JWT was formed using the deprecated "username" and "identity" fields with the usual iat, nbf, and exp tokens.
+The username could be found by getting the description of username from the html and the username "true.grit@umbccd.io."
+The secret could be found in the PCAP after a successful login (`dawgCTF?heckin#bamboozle`).
+The identity was leaked by the form after an attempted login and stored as "JWT 'identity'" in your cookies.
+
+This could be used to generate a JWT like the following, with a non expired iat.
+
+Create the following header and visit the `/jwtlogin` page found in the pcap.
+
+`'Authorization: JWT eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRydWUuZ3JpdEB1bWJjY2QuaW8iLCJpZGVudGl0eSI6MzEzMzcsImlhdCI6MTU4NjM1MDAwMCwibmJmIjoxNTg2MzUwMDAwLCJleHAiOjE1ODYzNjAwMDB9.NckkIU75dMdvSDtSUmoAl20NgjXTqWU2Q_cllY0eN9A`
+
+Part 3 - Free Wifi account
+--------------------------
+Solution: get control of an account.
+
+Looking at the javascript and html of the `/forgotpassword.html` page revealed that there were two fields: `user` and `email`.
+If you tried to change these manually, the javascript would change them after submission.
+You could change the javascript, but the post request was easier if you could forge the csrf token.
+
+`curl -X POST localhost/forgotpassword.html -H 'Content-Type: application/json' -H 'Cookie: session=eyJjc3JmX3Rva2VuIjoiNzNiMjYxYTBmZTUzMGQ1ZDE2NTdjMTM2ZTg0MjFmMzBjYmZmOGE4MSJ9.Xo1kXA.lQlki-2qioMO5T2LXWJxyvv8SyE' --data '{"user": "true.grit@umbccd.io", "email": "foo.bar@boo.zaz", "csrf_token": "eyJjc3JmX3Rva2VuIjoiNzNiMjYxYTBmZTUzMGQ1ZDE2NTdjMTM2ZTg0MjFmMzBjYmZmOGE4MSJ9.Xo1kXA.lQlki-2qioMO5T2LXWJxyvv8SyE"}' | less`
+
+Part 4 - Free Wifi wifikey
+--------------------------
+Solution: break the wifikey infrastructure.
+
+You were notified that the hashing algorithm for wifikey was sha1 by looking at your cookies.
+Taking a sha1 hash of any nonce in the pcap and looking at its corresponding login token revealed that the first 8 characters of the sha1 are used to generate the token.
+This is similar to how some first evolution two factor physical keys worked; however, their algorithms were proprietary.
+If you took the first 8 chars of the hash of the nonce in your browser, you would be able to login and get the flag.
