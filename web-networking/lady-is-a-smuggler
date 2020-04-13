@@ -1,0 +1,7 @@
+# Lady Is a Smuggler
+
+One of four flags on the same page
+
+## Solution
+
+Inspect the web page, either as page source or via developer tools in a a browser.  Do a find for DawgCTF. It's embedded in a URL parameter on an image in the page.
