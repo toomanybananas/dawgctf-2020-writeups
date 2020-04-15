@@ -1,0 +1,12 @@
+####################
+### NoSpacesBash ###
+####################
+
+Solution:
+Bash can use $'' to specially replace escape sequences with its corresponding
+characters. We can use \x20, which is hex for <space> to put a space between
+'cat' and 'flag.txt'. We can also define an environment variable that will
+hold the entire command and after assignment, which will always be successful
+we can && and substitute the command we just defined to display the flag.
+
+CMD=$'cat\\x20flag.txt'&&$CMD

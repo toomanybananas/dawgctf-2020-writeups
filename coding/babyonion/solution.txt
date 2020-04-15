@@ -1,0 +1,12 @@
+####################
+#### Baby Onion ####
+####################
+
+Solution:
+baby.onion is repeatedly base64 encoded and hex encoded over and over (15 times).
+To get the flag, decode hex then decode base64, 15 times. In the solution folder
+there is an unmake_baby_onion.py that will solve baby.onion to make sure it works.
+
+Flag:
+DawgCTF{b@by_0n10ns_c@n_$t1ll_Mak3_u_cRy!?!?}
+
